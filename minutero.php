@@ -14,7 +14,7 @@ for($i=0;$i<60;$i++){
                 $hr = 0;
             }
     } 
-    $date = date_create ("$hr:$min");
+    $date = date_create ("$hr:$min"); //formateo hora
     $a = date_format ($date,"H:i");
     echo "La hora es: $a hs.<br>";
 }
