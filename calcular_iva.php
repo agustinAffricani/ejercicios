@@ -41,7 +41,7 @@
 <body>
     <main class="container">
         <div class="row">
-            <div class="col-12 my-3">
+            <div class="col-6 my-3 text-center">
                 <h1>Calculadora de IVA</h1>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="col-4">
                 <form method="POST" action="">
                     <div>
-                    <label for="txtValorIva">IVA
+                    <label for="txtValorIva" class="py-2">IVA
                         <select name="lstIva" class="form-control">
                             <option value="27">27</option>
                             <option value="21">21</option>
@@ -58,11 +58,11 @@
                     </label>
                     </div>
                     <div>
-                        <label for="txtSinIva">Precio sin IVA:</label>
+                        <label for="txtSinIva" class="mt-2">Precio sin IVA:</label>
                         <input name="txtSinIva" id="txtSinIva" class="form-control">
                     </div>
                     <div>
-                        <label for="txtIva">Precio con IVA:</label>
+                        <label for="txtIva" class="mt-2">Precio con IVA:</label>
                         <input name="txtIva" id="txtIva" class="form-control">
                     </div>
                     <div>
@@ -78,7 +78,7 @@
                 ?>
             </div>
             <div class="col-4">
-            <table class="table table-hover border mt-3">
+            <table class="table table-hover border mt-5">
                     <tr>
                         <th>IVA:</th>
                         <td>$<?php echo $iva; ?></td>
