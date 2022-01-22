@@ -12,6 +12,7 @@
         $dni = $_REQUEST["txtDni"];
         $telefono = $_REQUEST["txtTelefono"];
         $edad = $_REQUEST["txtEdad"];
+        
         if(isset($_POST["btnAgregar"])){
             $_SESSION ["listado"] []= array(
                 "nombre" => $nombre,
@@ -25,7 +26,7 @@
             $_SESSION["listado"] = array();
         }
     }
-    
+    //print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
