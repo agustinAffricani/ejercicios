@@ -1,0 +1,1 @@
+[{"dni":"123456","nombre":"Juan","telefono":"654987","correo":"juan@mail.com","imagen":"2022013102015658.png"},{"dni":"123456","nombre":"Maria","telefono":"654987","correo":"juan@mail.com","imagen":""},{"dni":"123456","nombre":"Julia","telefono":"1233483","correo":"juan@mail.com","imagen":"2022013102011150.png"}]
