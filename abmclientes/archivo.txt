@@ -1,1 +1,1 @@
-{"4":{"dni":"1234563333","nombre":"agustin","telefono":"654987","correo":"juan@mail.com","imagen":"2022021712023207.png"}}
+{"4":{"dni":"1234563333","nombre":"agustin","telefono":"654987","correo":"juan@mail.com","imagen":"2022021712023207.png"},"5":{"dni":"37033550","nombre":"Juan Agustin Affricani","telefono":"2392487681","correo":"agustin.affricani@gmail.com","imagen":"2022021812021729.jpg"},"6":{"dni":"37033550","nombre":"Juan Agustin Affricani","telefono":"2392487681","correo":"agustin.affricani@gmail.com","imagen":"2022021812022930.jpg"}}

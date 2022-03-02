@@ -20,7 +20,6 @@ class Localidad{
     }
     
     public function obtenerPorProvincia($idProvincia){
-        $aLocalidades = null;
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "SELECT 
             idlocalidad,
@@ -30,17 +29,19 @@ class Localidad{
             WHERE fk_idprovincia = $idProvincia
             ORDER BY idlocalidad ASC";
         $resultado = $mysqli->query($sql);
-
-        while ($fila = $resultado->fetch_assoc()) {
-            $aLocalidades[] = array(
-                "idlocalidad" => $fila["idlocalidad"],
-                "nombre" => $fila["nombre"],
-                "cod_postal" => $fila["cod_postal"]);
-       
+    
+        if($resultado){
+            while ($fila = $resultado->fetch_assoc()) {
+                $entidadAux = new Localidad();
+                $entidadAux->idlocalidad = $fila["idlocalidad"];
+                $entidadAux->nombre = $fila["nombre"];
+                $entidadAux->cod_postal = $fila["cod_postal"];
+                $aLocalidades[] = $entidadAux;
+           
+            }
+            return $aLocalidades;
         }
-        return $aLocalidades;
     }
-
 }
 
 

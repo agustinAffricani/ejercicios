@@ -31,7 +31,7 @@ class Producto{
         $this->nombre = isset($request["txtNombre"]) ? $request["txtNombre"] : "";
         $this->cantidad = isset($request["txtCantidad"]) ? $request["txtCantidad"] : "";
         $this->precio = isset($request["txtPrecio"]) ? $request["txtPrecio"] : "";
-        $this->imagen = isset($request["img"]) ? $request["img"] : "";
+        $this->imagen = isset($request["imagen"]) ? $request["imagen"] : "";
         $this->descripcion = isset($request["txtDescripcion"]) ? $request["txtDescripcion"] : "";
         $this->fk_idtipoproducto = isset($request["lstTipoProducto"]) ? $request["lstTipoProducto"] : "";
     }
@@ -78,8 +78,8 @@ class Producto{
                 imagen = '" . $this->imagen . "',
                 descripcion =  '" . $this->descripcion . "',
                 fk_idtipoproducto =  '" . $this->fk_idtipoproducto . "'
-                WHERE idcliente = " . $this->idproducto;
-
+                WHERE idproducto = " . $this->idproducto;
+        //print_r($sql); exit;
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
         }
@@ -106,7 +106,7 @@ class Producto{
                         precio,
                         imagen,
                         descripcion,
-                        fk_tipoproducto
+                        fk_idtipoproducto
                 FROM productos
                 WHERE idproducto = $this->idproducto";
         if (!$resultado = $mysqli->query($sql)) {
@@ -148,7 +148,7 @@ class Producto{
 
             while($fila = $resultado->fetch_assoc()){
                 $entidadAux = new Producto();
-                $entidadAux->idproducto = $fila["idcliente"];
+                $entidadAux->idproducto = $fila["idproducto"];
                 $entidadAux->nombre = $fila["nombre"];
                 $entidadAux->cantidad = $fila["cantidad"];
                 $entidadAux->precio = $fila["precio"];

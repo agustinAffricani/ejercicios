@@ -34,16 +34,21 @@ if(isset($_GET["do"]) && $_GET["do"] == "buscarLocalidad" && $_GET["id"] && $_GE
     $localidad = new Localidad();
     $aLocalidad = $localidad->obtenerPorProvincia($idProvincia);
     echo json_encode($aLocalidad);
+    print_r($aLocalidad);
     exit;
 } 
 if(isset($_GET["id"]) && $_GET["id"] > 0){
     $cliente->obtenerPorId();
 }
 
-
 $provincia = new Provincia();
 $aProvincias = $provincia->obtenerTodos();
 
+if(isset($_GET["id"]) && $_GET["id"] > 0){
+    $localidad = new Localidad();
+    $aLocalidad = $localidad->obtenerPorProvincia($cliente->fk_idprovincia);
+}
+//print_r($aLocalidad); exit;
 include_once("header.php"); 
 ?>
         <!-- Begin Page Content -->
@@ -109,7 +114,7 @@ include_once("header.php");
                     </select>
                     <select class="form-control d-inline"  name="txtAnioNac" id="txtAnioNac" style="width: 100px">
                         <option selected="" disabled="">YYYY</option>
-                        <?php for($i=1900; $i <= date("Y"); $i++): ?>
+                        <?php for($i=date("Y"); $i >=1900 ; $i--): ?>
                          <?php if($cliente->fecha_nac != "" && $i == date_format(date_create($cliente->fecha_nac), "Y")): ?>
                             <option selected><?php echo $i; ?></option>
                             <?php else: ?>
@@ -127,27 +132,27 @@ include_once("header.php");
                     </div>
                     <div class="row panel-body p-3">
                         <div class="col-6 form-group">
-                            <label for="txtTelefono">Provincia:</label>
+                            <label for="txtProvincia">Provincia:</label>
                             <select class="form-control" name="lstProvincia" id="lstProvincia" onchange="fBuscarLocalidad()" required>
-                                <option value="" disabled selected>Seleccionar</option>
+                                <option value="" disabled <?php echo (!isset($_REQUEST["id"])? "selected":"");?> selected>Seleccionar</option>
                                 <?php foreach($aProvincias as $provincia): ?>
-                                    <?php if($cliente->fk_idprovincia == $provincia->idprovincia): ?>
-                                        <option selected value="<?php echo $provincia->idprovincia; ?>"><?php echo $provincia->nombre; ?></option>
-                                    <?php else: ?>
-                                        <option value="<?php echo $provincia->idprovincia; ?>"><?php echo $provincia->nombre; ?></option>
-                                    <?php endif; ?>
+                                    <option value="<?php echo $provincia->idprovincia; ?>" <?php if($cliente->fk_idprovincia == $provincia->idprovincia) echo "selected"; ?>><?php echo $provincia->nombre; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-6 form-group">
-                            <label for="txtTelefono">Localidad:</label>
+                            <label for="txtLocalidad">Localidad:</label>
                             <select class="form-control" name="lstLocalidad" id="lstLocalidad" required>
-                                <option value="" disabled selected>Seleccionar</option>
-                                <option value="1">CABA</option>
+                            <option value="" disabled <?php echo (!isset($_REQUEST["id"])? "selected":"");?>>Seleccionar</option>
+                            <?php if(isset($_REQUEST["id"])): ?>
+                                <?php foreach($aLocalidad as $localidad): ?>
+                                    <option value="<?php echo $localidad->idlocalidad; ?>" <?php if($cliente->fk_idlocalidad == $localidad->idlocalidad) echo "selected"; ?>><?php echo $localidad->nombre; ?></option>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
                         </div>
                         <div class="col-12 form-group">
-                            <label for="txtTelefono">Dirección:</label>
+                            <label for="txtDomicilio">Dirección:</label>
                             <input type="text" class="form-control" name="txtDomicilio" id="txtDomicilio" value="<?php echo $cliente->domicilio ?>">
                         </div>
                     </div>
@@ -177,7 +182,7 @@ $(document).ready( function () {
                 success: function (respuesta) {
                     let resultado = "<option value='0' disabled selected>Seleccionar</option>";
                     respuesta.forEach(function(valor, indice){
-                        resultado += `<option value="${valor.idlocalidad}">${valor.nombre}</option>`;
+                        resultado += `<option value="${valor.idlocalidad}">${valor.nombre}</option>`;  
                     });
                   $("#lstLocalidad").empty().append(resultado);
                 }
