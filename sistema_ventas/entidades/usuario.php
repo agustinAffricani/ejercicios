@@ -139,6 +139,7 @@ class Usuario {
             $this->correo = $fila["correo"];
         }
         $mysqli->close();
+        return $this;
     }
 
     public function obtenerTodos(){

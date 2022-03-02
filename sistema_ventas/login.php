@@ -1,25 +1,21 @@
 <?php
-session_start();
+include_once "config.php";
+include_once "entidades/usuario.php";
+
+$entidadUsuario = new Usuario();
+
 
 if($_POST){
-  $usuario = trim($_REQUEST["txtUsuario"]);
+  $nomUsuario = trim($_REQUEST["txtUsuario"]);
   $clave = trim($_REQUEST["txtClave"]);
-
-  //Si el usuario es admin y la clave es admin123
-    //redireccionar a index.php
-  if($usuario == "admin" && $clave == "admin123"){
-      $_SESSION["nombre"] = "Agustin";
+  $usuario = $entidadUsuario->obtenerPorUsuario($nomUsuario);
+  if($usuario->idusuario!="" && $usuario->verificarClave($clave,$usuario->clave)){
+      $_SESSION["nombre"] = $usuario->nombre;
       header("Location: index.php");
-  }
-  //sino
-    //$msg = "Usuario o clave incorrecto";
-  else{
-      $msg = "Usuario o clave incorrecta";
-  }
-
+  }else{
+        $msg = "Usuario o clave incorrecta";
+    }
 }
-
-
 
 ?>
 <!DOCTYPE html>
